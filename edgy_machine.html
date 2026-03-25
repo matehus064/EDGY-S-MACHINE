@@ -1,0 +1,229 @@
+<!-- Criado por Marise Miranda | 2017.1 -->
+<!-- Adaptado por Matheus Matos | 2025.1 -->
+
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPTecher's Machine</title>
+</head>
+
+<style>
+    body {
+        background-image: url("bg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    @font-face {
+        font-family: 'Pixelout';
+        /* Nome que você escolheu */
+        src: url('fonts/Pixelout\ Personal\ Use\ Only.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Cavalhatriz';
+        /* Nome que você escolheu */
+        src: url('fonts/Cavalhatriz.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Alagard';
+        /* Nome que você escolheu */
+        src: url('fonts/alagard.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    h1 {
+        font-family: 'Pixelout', sans-serif;
+        font-size: 3rem;
+        color: #ff0000;
+        text-shadow: 3px 3px 0px #ff00004d;
+    }
+
+    h3 {
+        font-family: 'Alagard';
+        font-size: 2rem;
+        color: #ff0000;
+        text-shadow: 3px 3px 0px #ff00004d;
+    }
+
+    * {
+        cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym46.cur'), auto !important;
+        font-family: 'Alagard';
+        font-size: 20px;
+        color: #ffffff;
+    }
+
+    .resultado {
+        font-size: 40px;
+        color: #ffae00;
+        text-shadow: 2px 2px #000;
+        margin: 10px 0;
+    }
+
+    .footer_player {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #111;
+        border-top: 4px ridge #ff0000;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px;
+        z-index: 9999;
+        box-shadow: 0px -5px 15px #ff00004d;
+
+    }
+
+    .info_player {
+        width: 40%;
+        background: #000;
+        border: 2px inset #444;
+        font-size: 8px;
+        padding: 5px;
+    }
+
+    .controle {
+        display: flex;
+        gap: 10px;
+    }
+
+    #playlist {
+        background: #222;
+        color: #fff;
+        border: 2px solid #ff0000;
+        font-size: 8px;
+        padding: 5px;
+    }
+
+    .btn_play {
+        background: #c0c0c0;
+        border: 3px outset #fff;
+        font-size: 10px;
+        cursor: pointer;
+    }
+
+    .btn_play:active {
+        border: 3px inset #fff;
+    }
+</style>
+
+<body bgcolor="#000000">
+    <center>
+        <h1>edgy's Machine</h1>
+
+        <h3>Digite um número decimal:</h3>
+        <input style="font-size: 32px; color: #000;" class="btn_play" id="demo1" type="text" placeholder="Ex: 666"
+            oninput="converter()">
+        <br>
+
+        <h3>Resultados:</h3>
+        <p>Octal:
+        <div id="demo2" class="resultado"></div>
+        </p>
+        <p>Hexadecimal:
+        <div id="demo3" class="resultado"></div>
+        </p>
+        <p>Binário:
+        <div id="demo4" class="resultado"></div>
+        </p>
+
+        <div class="footer_player">
+
+            <div class="info_player">
+                <marquee style="color: #ffae00;" id="musica_nome" scrollamount="5">ESCOLHA UMA FAIXA PARA DETONAR...</marquee>
+            </div>
+
+            <div class="controle">
+                <select id="playlist" onchange="trocarMusica()">
+                    <option value="">-- SELECIONE A BANGER --</option>
+                    <option value="musica1.mp3">01. Be Quiet and Drive</option>
+                    <option value="musica2.mp3">02. Digital Bath</option>
+                    <option value="musica3.mp3">03. Change (In the House of Flies)</option>
+                    <option value="musica4.mp3">04. Sextape</option>
+                </select>
+
+                <button class="btn_play" onclick="playMusica()">PLAY</button>
+                <button class="btn_play" onclick="pausarMusica()">STOP</button>
+            </div>
+
+            <audio id="tocando"></audio>
+
+        </div>
+    </center>
+
+    <pre id="imagem2"></pre>
+
+    <script>
+        function converter() {
+            var decimal = Number(demo1.value);
+
+            demo2.innerHTML = decimal.toString(8);
+            demo3.innerHTML = decimal.toString(16);
+            demo4.innerHTML = decimal.toString(2);
+        }
+
+
+        let audio = document.getElementById('tocando');
+        let playlist = document.getElementById('playlist');
+        let nomeMusica = document.getElementById('musica_nome');
+
+        function trocarMusica() {
+            let musicaSelecionada = playlist.value;
+            if (musicaSelecionada) {
+                audio.src = musicaSelecionada;
+                nomeMusica.innerText = "TOCANDO AGORA: " + playlist.options[playlist.selectedIndex].text;
+                audio.play();
+            }
+
+            if (musicaSelecionada == "musica1.mp3") {
+                imagem2.innerHTML = "<img src='midia/around.gif'>";
+                foto.style.display = "block";
+            }
+            else if (musicaSelecionada == "musica2.mp3") {
+                imagem2.innerHTML = "<img src='midia/pony.gif'>";
+                foto.style.display = "block";
+            }
+            else if (musicaSelecionada == "musica3.mp3") {
+                imagem2.innerHTML = "<img src='midia/pony.gif'>";
+                foto.style.display = "block";
+            }
+            else if (musicaSelecionada == "musica4.mp3") {
+                imagem2.innerHTML = "<img src='midia/diamond.gif'>";
+                foto.style.display = "block";
+            }
+            else {
+
+                imagem2.innerHTML = "";
+            }
+        }
+
+        function playMusica() {
+            if (audio.src) {
+                audio.play();
+            } else {
+                alert("Escolha uma música primeiro, mermão!");
+            }
+        }
+
+        function pausarMusica() {
+            audio.pause();
+            imagem.innerHTML = "";
+        }
+
+    </script>
+</body>
+
+</html>
